@@ -7,6 +7,15 @@
 **Tether Ticker(Crypto Price) Checker** is a decentralized cryptocurrency price tracking system built using **Hyperswarm RPC** and **Hypercore/Hyperbee**. It fetches real-time prices from **CoinGecko**, processes the data, and allows for both **on-demand querying** and **scheduled updates**.
 
 
+
+## Minimum Requirements
+- Node.js v22 or higher is required to run this project.
+- By default, the `package.json` enforces this via the `engines` field:
+
+  ```json
+  "engines": {
+    "node": ">=22.0.0"
+  }
 ---
 
 ## **Technical Architecture**

@@ -15,6 +15,9 @@
     "format": "prettier --write 'src/**/*.js' 'tests/**/*.js'",
     "format:check": "prettier --check 'src/**/*.js' 'tests/**/*.js'"
   },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "dependencies": {
     "@hyperswarm/rpc": "^3.3.2",
     "axios": "^1.7.9",
