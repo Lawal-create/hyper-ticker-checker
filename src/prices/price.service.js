@@ -22,10 +22,10 @@ class PriceService {
   async getTopFiveCryptos(timestamp = Date.now()) {
     try {
       const topCryptos = await this.coingecko.fetchTopCryptos();
-      const cryptoIDs = topCryptos.map(crypto => crypto.id);
+      const cryptoIDs = topCryptos.map((crypto) => crypto.id);
 
       const topExchanges = await this.coingecko.fetchTopExchanges();
-      const exchangeIDs = topExchanges.map(exchange => exchange.id);
+      const exchangeIDs = topExchanges.map((exchange) => exchange.id);
 
       const tickers = [];
 
@@ -70,10 +70,10 @@ class PriceService {
       result[currency] = {
         timestamp,
         price: averagePrice,
-        exchanges: prices.map(ticker => ({
+        exchanges: prices.map((ticker) => ({
           exchange: ticker.exchange_id,
-          price: ticker.last
-        }))
+          price: ticker.last,
+        })),
       };
     }
 
@@ -88,25 +88,26 @@ class PriceService {
    * @returns {Array}
    */
   _normalizeTickers(tickers, cryptos, exchanges) {
-  return tickers.reduce((acc, ticker) => {
-    const valid = ticker.target === TARGET_CURRENCY &&
-      cryptos.includes(ticker.coin_id) &&
-      exchanges.includes(ticker.market.identifier) &&
-      ticker.last > 0;
+    return tickers.reduce((acc, ticker) => {
+      const valid =
+        ticker.target === TARGET_CURRENCY &&
+        cryptos.includes(ticker.coin_id) &&
+        exchanges.includes(ticker.market.identifier) &&
+        ticker.last > 0;
 
-    if (!valid) return acc;
+      if (!valid) return acc;
 
-    acc.push({
-      base: ticker.base,
-      target: ticker.target,
-      last: ticker.last,
-      coin_id: ticker.coin_id,
-      target_coin_id: ticker.target_coin_id,
-      exchange_id: ticker.market.identifier
-    });
-    return acc;
-  }, []);
-}
+      acc.push({
+        base: ticker.base,
+        target: ticker.target,
+        last: ticker.last,
+        coin_id: ticker.coin_id,
+        target_coin_id: ticker.target_coin_id,
+        exchange_id: ticker.market.identifier,
+      });
+      return acc;
+    }, []);
+  }
 
   /**
    * Fetches latest prices and stores them if they changed.
@@ -163,7 +164,7 @@ class PriceService {
 
       for await (const { key, value } of this.db.createReadStream({
         gte: `prices:${from}`,
-        lte: `prices:${to}`
+        lte: `prices:${to}`,
       })) {
         const timestamp = parseInt(key.split(":")[1], 10);
         results.push({ timestamp, data: value });

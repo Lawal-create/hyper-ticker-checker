@@ -8,18 +8,12 @@ const trimmedString = z.string().trim();
 const envSchema = z.object({
   coingecko_api_key: trimmedString,
   prices_job_schedule: trimmedString.default("0 * * * * *"),
-  timeout_period: z.coerce.number().default(5000)
+  timeout_period: z.coerce.number().default(5000),
 });
 
 class IncompleteEnvError extends Error {
   constructor(error) {
-    super(
-      `Missing or invalid environment variables:\n${JSON.stringify(
-        error.messages,
-        null,
-        2
-      )}`
-    );
+    super(`Missing or invalid environment variables:\n${JSON.stringify(error.messages, null, 2)}`);
   }
 }
 

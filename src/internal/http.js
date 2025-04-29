@@ -18,7 +18,7 @@ class HttpClient {
       (error) => {
         this.logger.axiosError(error);
         return Promise.reject(error);
-      }
+      },
     );
 
     // Response Interceptor - Log responses
@@ -30,7 +30,7 @@ class HttpClient {
       (error) => {
         this.logger.axiosError(error);
         return Promise.reject(error);
-      }
+      },
     );
   }
 

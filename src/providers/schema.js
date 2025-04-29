@@ -40,5 +40,5 @@ module.exports = {
   ExchangeSchema,
   ExchangesSchema,
   CryptoSchema,
-  CryptosSchema
+  CryptosSchema,
 };

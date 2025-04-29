@@ -24,7 +24,7 @@ class CoinGeckoProvider {
       },
     });
 
-    return ExchangesSchema.parse(result.data)
+    return ExchangesSchema.parse(result.data);
   }
 
   /**
@@ -43,10 +43,10 @@ class CoinGeckoProvider {
         x_cg_demo_api_key: env.coingecko_api_key,
       },
     });
-    
-    return CryptosSchema.parse(coins.data)
+
+    return CryptosSchema.parse(coins.data);
   }
-    /**
+  /**
    * Fetches cryptocurrency by exchanges
    * @param {string} exchanges - List of Exchanges to fetch from
    * @param {string[]} crypto - cryptocurrency to fetch

@@ -47,11 +47,11 @@ const startRpcServer = async (container) => {
 };
 
 (async () => {
-    try {
-      await startRpcServer(container);
-    //   await startScheduler();
-    } catch (error) {
-      console.error("Failed to start services:", error);
-      process.exit(1);
-    }
-  })();
+  try {
+    await startRpcServer(container);
+    await startScheduler();
+  } catch (error) {
+    console.error("Failed to start services:", error);
+    process.exit(1);
+  }
+})();

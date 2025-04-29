@@ -62,7 +62,7 @@ class Logger {
       this.logger.error({ axios_setup_error: err.message });
     }
   }
-  
+
   /**
    * Log data
    * @param metadata data to be loggwed

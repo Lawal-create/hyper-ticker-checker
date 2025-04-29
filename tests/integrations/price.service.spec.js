@@ -147,7 +147,7 @@ describe("PriceService Integration Tests", () => {
       try {
         await priceService.fetchAndStorePrices();
       } catch (error) {
-        console.log((error))
+        console.log(error);
         expect(error.message).to.include("CoinGecko API down");
       }
     });

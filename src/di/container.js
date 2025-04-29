@@ -19,7 +19,7 @@ container.bind(TYPES.HTTPClient).toDynamicValue((context) => {
 });
 
 // Binds HyperbeeDB
-container.bind(TYPES.HyperBeeDB).toDynamicValue((_context) => {
+container.bind(TYPES.HyperBeeDB).toDynamicValue(() => {
   const hyperbee = new HyperBeeStorage();
   return hyperbee.getDB();
 });
@@ -33,15 +33,14 @@ container.bind(TYPES.CoinGeckoProvider).toDynamicValue((context) => {
 container.bind(TYPES.PriceService).toDynamicValue((context) => {
   const logger = context.container.get(TYPES.Logger);
   logger.log("Logger is ready ✅");
-  
+
   const provider = context.container.get(TYPES.CoinGeckoProvider);
   logger.log("CoinGeckoProvider is ready ✅");
-  
+
   const db = context.container.get(TYPES.HyperBeeDB);
   logger.log("HyperBeeDB is ready ✅");
-  
+
   return new PriceService(provider, db, logger);
 });
-
 
 module.exports = container;
