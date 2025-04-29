@@ -92,7 +92,7 @@ yarn install
 ### **Get a working .env and update with your Coingecko API key (and desired cron schedule - there is a default)**
 
 ```sh
-cp .env.example e.nv
+cp .env.example env
 ```
 
 ### **Start the RPC Server**
