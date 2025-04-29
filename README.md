@@ -127,4 +127,3 @@ yarn test
 
 Tests use **Sinon.js** to mock CoinGecko API requests.
 
-#### Time didn't allow to write all the tests for the other usecases
