@@ -24,5 +24,10 @@ container.bind(TYPES.HyperBeeDB).toDynamicValue((_context) => {
   return hyperbee.getDB();
 });
 
+// Binds CoinGeckoProvider and inject HttpClient
+container.bind(TYPES.CoinGeckoProvider).toDynamicValue((context) => {
+    return new CoinGeckoProvider(context.container.get(TYPES.HTTPClient));
+  });
+
 
 module.exports = container;
