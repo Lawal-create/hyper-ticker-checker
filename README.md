@@ -4,7 +4,7 @@
 
 ## **Overview**
 
-**HyperTicker** is a decentralized cryptocurrency price tracking system built using **Hyperswarm RPC** and **Hypercore/Hyperbee**. It fetches real-time prices from **CoinGecko**, processes the data, and allows for both **on-demand querying** and **scheduled updates**.
+**Tether Ticker(Crypto Price) Checker** is a decentralized cryptocurrency price tracking system built using **Hyperswarm RPC** and **Hypercore/Hyperbee**. It fetches real-time prices from **CoinGecko**, processes the data, and allows for both **on-demand querying** and **scheduled updates**.
 
 
 ---
@@ -13,7 +13,7 @@
 
 ### **Data Collection**
 
-To gather price data for the **top 5 cryptocurrencies from the top 3 exchanges**, HyperTicker:
+To gather price data for the **top 5 cryptocurrencies from the top 3 exchanges**, Ticker Checker:
 
 1. **Fetch top 5 cryptocurrencies** from CoinGecko.
 2. **Retrieves the top 3 exchanges** trading each coin in USDT(USD).
