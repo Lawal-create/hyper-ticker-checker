@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 const { z } = require("zod");
 const mapKeys = require("lodash/mapKeys");
-const { DataValidationError, validate } = require("./validator");
+const { ValidatorError, validate } = require("./validator");
 
 const trimmedString = z.string().trim();
 
@@ -37,7 +37,7 @@ function setupEnv(schema = envSchema) {
   try {
     return validate(processedEnv, schema);
   } catch (err) {
-    if (err instanceof DataValidationError) {
+    if (err instanceof ValidatorError) {
       throw new IncompleteEnvError(err);
     }
     throw err;

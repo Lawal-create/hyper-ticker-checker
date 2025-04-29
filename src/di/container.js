@@ -26,8 +26,22 @@ container.bind(TYPES.HyperBeeDB).toDynamicValue((_context) => {
 
 // Binds CoinGeckoProvider and inject HttpClient
 container.bind(TYPES.CoinGeckoProvider).toDynamicValue((context) => {
-    return new CoinGeckoProvider(context.container.get(TYPES.HTTPClient));
-  });
+  return new CoinGeckoProvider(context.container.get(TYPES.HTTPClient));
+});
+
+// Binds PriceService and injects CoinGeckoProvider, HyperbeeDB and Logger
+container.bind(TYPES.PriceService).toDynamicValue((context) => {
+  const logger = context.container.get(TYPES.Logger);
+  logger.log("Logger is ready ✅");
+  
+  const provider = context.container.get(TYPES.CoinGeckoProvider);
+  logger.log("CoinGeckoProvider is ready ✅");
+  
+  const db = context.container.get(TYPES.HyperBeeDB);
+  logger.log("HyperBeeDB is ready ✅");
+  
+  return new PriceService(provider, db, logger);
+});
 
 
 module.exports = container;
