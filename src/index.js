@@ -3,6 +3,7 @@ const container = require("./di/container");
 const RPC = require("@hyperswarm/rpc");
 const DHT = require("hyperdht");
 const { TYPES } = require("./di/types");
+const { startScheduler } = require("./jobs/prices.job");
 
 const startRpcServer = async (container) => {
   const logger = container.get(TYPES.Logger);
@@ -48,6 +49,7 @@ const startRpcServer = async (container) => {
 (async () => {
     try {
       await startRpcServer(container);
+      await startScheduler();
     } catch (error) {
       console.error("Failed to start services:", error);
       process.exit(1);
