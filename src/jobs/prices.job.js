@@ -23,7 +23,7 @@ async function fetchAndStorePrices({ priceService, logger }) {
 /**
  * Starts the cron-based scheduler for periodic price fetching.
  */
-function startScheduler() {
+function startPriceJob() {
   const logger = container.get(TYPES.Logger);
   const priceService = container.get(TYPES.PriceService);
 
@@ -48,4 +48,4 @@ if (require.main === module) {
   })();
 }
 
-module.exports = { startScheduler };
+module.exports = { startPriceJob };
