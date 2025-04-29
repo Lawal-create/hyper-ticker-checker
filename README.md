@@ -102,6 +102,14 @@ yarn client
 
 Follow the on-screen instructions to query local or RPC data.
 
+### **Run Linting and Formatting for codbase**
+
+```sh
+yarn format && yarn lint:fix
+```
+
+To format the codebase using eslint and prettier.
+
 ### **Run Tests**
 
 ```sh
