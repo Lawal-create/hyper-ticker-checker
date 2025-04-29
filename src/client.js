@@ -26,21 +26,21 @@ async function initializeLocalDB() {
 
 async function initializeRPC() {
   if (!rpcPublicKey) {
-    await promptForPublicKey();
+    await requestForPublicKey();
   }
 
   if (!hyperDHT) {
     hyperDHT = new DHT();
     await hyperDHT.ready();
-    hyperRPC = new RPC({ hyperDHT });
+    hyperRPC = new RPC({ dht: hyperDHT });
   }
 }
 
-async function promptForPublicKey() {
+async function requestForPublicKey() {
   const key = await prompt("\nEnter RPC Server Public Key: ");
   if (!key || key.length !== 64) {
     console.log("Invalid public key. It must be 64 hex characters.");
-    return promptForPublicKey();
+    return requestForPublicKey();
   }
   rpcPublicKey = key;
   console.log("Public key stored for this session.");

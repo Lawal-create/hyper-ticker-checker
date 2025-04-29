@@ -27,7 +27,7 @@ function startScheduler() {
   const logger = container.get(TYPES.Logger);
   const priceService = container.get(TYPES.PriceService);
 
-  const schedule = env.prices_job_schedule || "*/30 * * * * *";
+  const schedule = env.prices_job_schedule || "0 */5 * * * *";
   logger.log(`Starting price update scheduler (${cronstrue.toString(schedule)})...`);
 
   cron.schedule(schedule, async () => {
