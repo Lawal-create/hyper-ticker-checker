@@ -1,0 +1,8 @@
+{
+  "name": "tether-ticker-checker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Lawal-create/tether-ticker-checker.git",
+  "author": "Hakeem Lawal",
+  "license": "MIT"
+}
