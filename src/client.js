@@ -4,10 +4,10 @@ const readline = require("readline");
 const RPC = require("@hyperswarm/rpc");
 const DHT = require("hyperdht");
 
+let hyperDHT = null;
+let hyperRPC = null;
 let priceService = null;
 let rpcPublicKey = null;
-let dht = null;
-let rpc = null;
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -18,21 +18,21 @@ function prompt(question) {
   return new Promise(resolve => rl.question(question, answer => resolve(answer.trim())));
 }
 
-async function ensureLocalDBInitialized() {
+async function initializeLocalDB() {
   if (!priceService) {
     priceService = container.get(TYPES.PriceService);
   }
 }
 
-async function ensureRpcInitialized() {
+async function initializeRPC() {
   if (!rpcPublicKey) {
     await promptForPublicKey();
   }
 
-  if (!dht) {
-    dht = new DHT();
-    await dht.ready();
-    rpc = new RPC({ dht });
+  if (!hyperDHT) {
+    hyperDHT = new DHT();
+    await hyperDHT.ready();
+    hyperRPC = new RPC({ hyperDHT });
   }
 }
 
@@ -82,8 +82,8 @@ async function promptUser() {
       case "6":
         console.log("Exiting...");
         rl.close();
-        if (rpc) await rpc.destroy();
-        if (dht) await dht.destroy();
+        if (hyperRPC) await hyperRPC.destroy();
+        if (hyperDHT) await hyperDHT.destroy();
         process.exit(0);
       default:
         console.log("Invalid choice. Please try again.");
@@ -96,19 +96,19 @@ async function promptUser() {
 }
 
 async function fetchAndStorePrices() {
-  await ensureLocalDBInitialized();
+  await initializeLocalDB();
   await priceService.fetchAndStorePrices();
   console.log("Prices updated and stored successfully.");
 }
 
 async function getLatestPrices() {
-  await ensureLocalDBInitialized();
+  await initializeLocalDB();
   const result = await priceService.getLatestPrices();
   console.log("\nLatest Prices:\n", JSON.stringify(result, null, 2));
 }
 
 async function getHistoricalPrices() {
-  await ensureLocalDBInitialized();
+  await initializeLocalDB();
   const from = parseInt(await prompt("Enter start timestamp (ms): "), 10);
   const to = parseInt(await prompt("Enter end timestamp (ms): "), 10);
 
@@ -122,14 +122,14 @@ async function getHistoricalPrices() {
 }
 
 async function getLatestPricesViaRPC() {
-  await ensureRpcInitialized();
-  const client = rpc.connect(Buffer.from(rpcPublicKey, "hex"));
+  await initializeRPC();
+  const client = hyperRPC.connect(Buffer.from(rpcPublicKey, "hex"));
   const response = await client.request("getLatestPrices");
   console.log("\nRPC Latest Prices:\n", JSON.stringify(JSON.parse(response.toString()), null, 2));
 }
 
 async function getHistoricalPricesViaRPC() {
-  await ensureRpcInitialized();
+  await initializeRPC();
   const from = parseInt(await prompt("Enter start timestamp (ms): "), 10);
   const to = parseInt(await prompt("Enter end timestamp (ms): "), 10);
 
@@ -138,7 +138,7 @@ async function getHistoricalPricesViaRPC() {
     return;
   }
 
-  const client = rpc.connect(Buffer.from(rpcPublicKey, "hex"));
+  const client = hyperRPC.connect(Buffer.from(rpcPublicKey, "hex"));
   const payload = Buffer.from(JSON.stringify({ from, to }), "utf-8");
   const response = await client.request("getHistoricalPrices", payload);
   console.log("\nRPC Historical Prices:\n", JSON.stringify(JSON.parse(response.toString()), null, 2));
