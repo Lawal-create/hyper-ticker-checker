@@ -8,7 +8,7 @@ const ExchangeSchema = z.object({
   description: z.string(),
   url: z.string().url(),
   image: z.string().url(),
-  has_trading_incentive: z.boolean(),
+  has_trading_incentive: z.boolean()
 });
 
 const ExchangesSchema = z.array(ExchangeSchema);
@@ -31,7 +31,7 @@ const CryptoSchema = z.object({
   market_cap_change_percentage_24h: z.number(),
   circulating_supply: z.number(),
   total_supply: z.number(),
-  ath: z.number(),
+  ath: z.number()
 });
 
 const CryptosSchema = z.array(CryptoSchema);
@@ -40,5 +40,5 @@ module.exports = {
   ExchangeSchema,
   ExchangesSchema,
   CryptoSchema,
-  CryptosSchema,
+  CryptosSchema
 };

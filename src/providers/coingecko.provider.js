@@ -20,8 +20,8 @@ class CoinGeckoProvider {
       params: {
         per_page: count,
         page: 1,
-        x_cg_demo_api_key: env.coingecko_api_key,
-      },
+        x_cg_demo_api_key: env.coingecko_api_key
+      }
     });
 
     return ExchangesSchema.parse(result.data);
@@ -40,8 +40,8 @@ class CoinGeckoProvider {
         order: "market_cap_desc",
         per_page: count,
         page: 1,
-        x_cg_demo_api_key: env.coingecko_api_key,
-      },
+        x_cg_demo_api_key: env.coingecko_api_key
+      }
     });
 
     return CryptosSchema.parse(coins.data);
@@ -58,8 +58,8 @@ class CoinGeckoProvider {
       params: {
         exchange_ids: exchanges.join(","),
         x_cg_demo_api_key: env.coingecko_api_key,
-        page,
-      },
+        page
+      }
     });
   }
 }

@@ -22,10 +22,10 @@ class PriceService {
   async getTopFiveCryptos(timestamp = Date.now()) {
     try {
       const topCryptos = await this.coingecko.fetchTopCryptos();
-      const cryptoIDs = topCryptos.map((crypto) => crypto.id);
+      const cryptoIDs = topCryptos.map(crypto => crypto.id);
 
       const topExchanges = await this.coingecko.fetchTopExchanges();
-      const exchangeIDs = topExchanges.map((exchange) => exchange.id);
+      const exchangeIDs = topExchanges.map(exchange => exchange.id);
 
       const tickers = [];
 
@@ -36,12 +36,7 @@ class PriceService {
         // Fetch all pages of tickers for a given crypto until no more tickers are returned.
         // The CoinGecko API paginates tickers without providing total pages upfront,
         // so we keep fetching page-by-page until we encounter an empty page.
-        while (
-          tickersData &&
-          tickersData.data &&
-          tickersData.data.tickers &&
-          tickersData.data.tickers.length > 0
-        ) {
+        while (tickersData && tickersData.data && tickersData.data.tickers && tickersData.data.tickers.length > 0) {
           tickers.push(...this._normalizeTickers(tickersData.data.tickers, cryptoIDs, exchangeIDs));
           tickersData = await this.coingecko.fetchCryptoByExchanges(exchangeIDs, crypto, ++page);
         }
@@ -70,10 +65,10 @@ class PriceService {
       result[currency] = {
         timestamp,
         price: averagePrice,
-        exchanges: prices.map((ticker) => ({
+        exchanges: prices.map(ticker => ({
           exchange: ticker.exchange_id,
-          price: ticker.last,
-        })),
+          price: ticker.last
+        }))
       };
     }
 
@@ -103,7 +98,7 @@ class PriceService {
         last: ticker.last,
         coin_id: ticker.coin_id,
         target_coin_id: ticker.target_coin_id,
-        exchange_id: ticker.market.identifier,
+        exchange_id: ticker.market.identifier
       });
       return acc;
     }, []);
@@ -164,7 +159,7 @@ class PriceService {
 
       for await (const { key, value } of this.db.createReadStream({
         gte: `prices:${from}`,
-        lte: `prices:${to}`,
+        lte: `prices:${to}`
       })) {
         const timestamp = parseInt(key.split(":")[1], 10);
         results.push({ timestamp, data: value });

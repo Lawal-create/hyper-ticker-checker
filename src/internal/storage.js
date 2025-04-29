@@ -4,11 +4,11 @@ const Hyperbee = require("hyperbee");
 class HyperBeeStorage {
   constructor(storagePath = "./data/prices") {
     this.core = new Hypercore(storagePath, {
-      valueEncoding: "json",
+      valueEncoding: "json"
     });
     this.db = new Hyperbee(this.core, {
       keyEncoding: "utf-8",
-      valueEncoding: "json",
+      valueEncoding: "json"
     });
   }
 

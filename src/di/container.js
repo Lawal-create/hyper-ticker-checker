@@ -13,7 +13,7 @@ const logger = new Logger({ name: "crypto-price-checker" });
 container.bind(TYPES.Logger).toConstantValue(logger);
 
 // Binds HttpClient and inject Logger
-container.bind(TYPES.HTTPClient).toDynamicValue((context) => {
+container.bind(TYPES.HTTPClient).toDynamicValue(context => {
   const httpClient = new HttpClient(context.container.get(TYPES.Logger));
   return httpClient.getClient();
 });
@@ -25,12 +25,12 @@ container.bind(TYPES.HyperBeeDB).toDynamicValue(() => {
 });
 
 // Binds CoinGeckoProvider and inject HttpClient
-container.bind(TYPES.CoinGeckoProvider).toDynamicValue((context) => {
+container.bind(TYPES.CoinGeckoProvider).toDynamicValue(context => {
   return new CoinGeckoProvider(context.container.get(TYPES.HTTPClient));
 });
 
 // Binds PriceService and injects CoinGeckoProvider, HyperbeeDB and Logger
-container.bind(TYPES.PriceService).toDynamicValue((context) => {
+container.bind(TYPES.PriceService).toDynamicValue(context => {
   const logger = context.container.get(TYPES.Logger);
   logger.log("Logger is ready ✅");
 

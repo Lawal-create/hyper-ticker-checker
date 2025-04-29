@@ -13,9 +13,9 @@ class Logger {
           {
             stream: config.buffer || process.stdout,
             level: config.verbose === false ? ERROR : INFO,
-            type: !!config.buffer ? "raw" : "stream",
-          },
-        ],
+            type: !!config.buffer ? "raw" : "stream"
+          }
+        ]
       });
     }
   }
@@ -48,14 +48,14 @@ class Logger {
         axios_res: {
           status: err.response.status,
           headers: err.response.headers,
-          data: err.response.data,
-        },
+          data: err.response.data
+        }
       });
     } else if (err.request) {
       // Request made but no response received (e.g., timeout, network error)
       this.logger.error({
         axios_req: err.config,
-        axios_no_response: true,
+        axios_no_response: true
       });
     } else {
       // Something happened while setting up the request

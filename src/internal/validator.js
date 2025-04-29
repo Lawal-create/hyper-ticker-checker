@@ -3,7 +3,7 @@ class ValidatorError extends Error {
     super("Validation failed");
     this.messages = {};
 
-    baseErr.errors.forEach((issue) => {
+    baseErr.errors.forEach(issue => {
       const field = issue.path.join(".") || "unknown";
       this.messages[field] = issue.message;
     });
@@ -28,5 +28,5 @@ function validate(data, schema) {
 
 module.exports = {
   ValidatorError,
-  validate,
+  validate
 };

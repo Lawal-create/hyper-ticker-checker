@@ -8,7 +8,7 @@ const trimmedString = z.string().trim();
 const envSchema = z.object({
   coingecko_api_key: trimmedString,
   prices_job_schedule: trimmedString.default("0 * * * * *"),
-  timeout_period: z.coerce.number().default(5000),
+  timeout_period: z.coerce.number().default(5000)
 });
 
 class IncompleteEnvError extends Error {
@@ -39,5 +39,5 @@ function setupEnv(schema = envSchema) {
 }
 
 module.exports = {
-  env: setupEnv(),
+  env: setupEnv()
 };

@@ -5,7 +5,7 @@ const DHT = require("hyperdht");
 const { TYPES } = require("./di/types");
 const { startScheduler } = require("./jobs/prices.job");
 
-const startRpcServer = async (container) => {
+const startRpcServer = async container => {
   const logger = container.get(TYPES.Logger);
   logger.log("Starting RPC server...");
 
@@ -22,7 +22,7 @@ const startRpcServer = async (container) => {
     return Buffer.from(JSON.stringify(data), "utf-8");
   });
 
-  server.respond("getHistoricalPrices", async (reqBuffer) => {
+  server.respond("getHistoricalPrices", async reqBuffer => {
     const priceService = container.get(TYPES.PriceService);
     logger.log("RPC request: getHistoricalPrices");
 

@@ -11,11 +11,11 @@ let rpcPublicKey = null;
 
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 });
 
 function prompt(question) {
-  return new Promise((resolve) => rl.question(question, (answer) => resolve(answer.trim())));
+  return new Promise(resolve => rl.question(question, answer => resolve(answer.trim())));
 }
 
 async function initializeLocalDB() {
@@ -141,10 +141,7 @@ async function getHistoricalPricesViaRPC() {
   const client = hyperRPC.connect(Buffer.from(rpcPublicKey, "hex"));
   const payload = Buffer.from(JSON.stringify({ from, to }), "utf-8");
   const response = await client.request("getHistoricalPrices", payload);
-  console.log(
-    "\nRPC Historical Prices:\n",
-    JSON.stringify(JSON.parse(response.toString()), null, 2),
-  );
+  console.log("\nRPC Historical Prices:\n", JSON.stringify(JSON.parse(response.toString()), null, 2));
 }
 
 console.log("Cryptocurrency Price Service CLI Started");

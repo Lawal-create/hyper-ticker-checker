@@ -8,7 +8,7 @@ const {
   CoinGeckoProviderStub,
   mockFetchTopExchanges,
   mockFetchTopCryptos,
-  mockFetchCryptoByExchanges,
+  mockFetchCryptoByExchanges
 } = require("../helpers/coingecko.helper");
 
 describe("PriceService Integration Tests", () => {

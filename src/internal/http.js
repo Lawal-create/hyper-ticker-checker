@@ -11,26 +11,26 @@ class HttpClient {
 
     // Request Interceptor - Log outgoing request
     this.client.interceptors.request.use(
-      (req) => {
+      req => {
         this.logger.axiosRequest(req);
         return req;
       },
-      (error) => {
+      error => {
         this.logger.axiosError(error);
         return Promise.reject(error);
-      },
+      }
     );
 
     // Response Interceptor - Log responses
     this.client.interceptors.response.use(
-      (res) => {
+      res => {
         this.logger.axiosResponse(res);
         return res;
       },
-      (error) => {
+      error => {
         this.logger.axiosError(error);
         return Promise.reject(error);
-      },
+      }
     );
   }
 
