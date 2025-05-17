@@ -4,7 +4,7 @@
 
 ## **Overview**
 
-**Tether Ticker(Crypto Price) Checker** is a decentralized cryptocurrency price tracking system built using **Hyperswarm RPC** and **Hypercore/Hyperbee**. It fetches real-time prices from **CoinGecko**, processes the data, and allows for both **on-demand querying** and **scheduled updates**.
+**Hyper Ticker(Crypto Price) Checker** is a decentralized cryptocurrency price tracking system built using **Hyperswarm RPC** and **Hypercore/Hyperbee**. It fetches real-time prices from **CoinGecko**, processes the data, and allows for both **on-demand querying** and **scheduled updates**.
 
 
 
