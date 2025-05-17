@@ -1,5 +1,5 @@
 
-# **Tether Ticker(Crypto Price) Checker**
+# **Hyper Ticker(Crypto Price) Checker**
 
 
 ## **Overview**
